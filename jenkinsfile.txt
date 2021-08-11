@@ -26,6 +26,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Test....'
+		bat 'pip install selenium'
                 bat 'python ./WorldOfGames/e2e.py' 
                 echo 'Test done'
             }
