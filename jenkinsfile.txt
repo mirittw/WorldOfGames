@@ -36,11 +36,7 @@ pipeline {
                 echo 'Finalize....'
                 bat 'docker tag wog mirittw/WorldOfGames'
                 bat 'docker push mirittw/WorldOfGames'
-                
                 bat 'docker stop wog'
-                bat 'docker rm -f wog'
-                bat 'docker image rm wog'
-                bat 'docker image rm mirittw/WorldOfGames'
                 echo 'Finalize done'
             }
         }
