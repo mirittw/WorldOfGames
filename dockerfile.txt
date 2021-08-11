@@ -1,4 +1,4 @@
-FROM python
+FROM python:alpline
 echo from
 WORKDIR /app
 echo WORKDIR 
