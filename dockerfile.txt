@@ -1,7 +1,14 @@
 FROM python:alpline
+echo from
 WORKDIR /app
+echo WORKDIR 
 COPY requirements.txt requirements.txt
+echo COPY 
 RUN pip3 install -r requirements.txt
+echo run
 COPY . /app
+echo copy
 CMD pyton app/MainGame.py
+echo cmd
 ENTRYPOINT ["python", "-m" , "flask", "run"]
+echo ENTRYPOINT 
