@@ -12,4 +12,8 @@ def test_scores_service(url):
     else:
         return True
 
-#def main_function():
+def main_function():
+    if test_scores_service("http://127.0.0.1:5001/scores"):
+        return exit(0)
+    else:
+        return exit(-1)
