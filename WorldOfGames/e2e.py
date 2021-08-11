@@ -12,4 +12,4 @@ def test_scores_service(url):
     else:
         return True
 
-def main_function():
+#def main_function():
