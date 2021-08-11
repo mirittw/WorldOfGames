@@ -1,0 +1,47 @@
+pipeline {
+    agent any 
+    stages {
+        stage('checkout') {
+            steps {
+                echo 'checkout..'
+                git branch: 'main', url: 'https://github.com/mirittw/WorldOfGames.git'
+                echo 'checkout done'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Build..'
+                bat 'docker build -t wog -f dockerfile.txt .'
+                echo 'Build done'
+            }
+        }
+        stage('Run') {
+            steps {
+                echo 'Run....'
+                input message: 'Please enter your name:', parameters: [string(defaultValue: 'mirit', description: 'my name', name: 'name')]
+                bat 'docker run --rm wog'
+                echo 'Run done'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Test....'
+                bat 'python ./WorldOfGames/e2e.py' 
+                echo 'Test done'
+            }
+        }
+        stage('Finalize') {
+            steps {
+                echo 'Finalize....'
+                bat 'docker tag wog mirittw/WorldOfGames'
+                bat 'docker push mirittw/WorldOfGames'
+                
+                bat 'docker stop wog'
+                bat 'docker rm -f wog'
+                bat 'docker image rm wog'
+                bat 'docker image rm mirittw/WorldOfGames'
+                echo 'Finalize done'
+            }
+        }
+    }
+}
